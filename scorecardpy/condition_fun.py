@@ -6,6 +6,9 @@ import warnings
 import re
 from pandas.api.types import is_numeric_dtype
 
+# Joy edit
+import databricks.koalas as ks
+
 def str_to_list(x):
     if x is not None and isinstance(x, str):
         x = [x]
@@ -89,7 +92,8 @@ def rep_blank_na(dat): # cant replace blank string in categorical value with nan
 def check_y(dat, y, positive):
     positive = str(positive)
     # ncol of dt
-    if not isinstance(dat, pd.DataFrame):
+    # Joy edit
+    if not isinstance(dat, (pd.DataFrame, ks.DataFrame)):
         raise Exception("Incorrect inputs; dat should be a DataFrame.")
     elif dat.shape[1] <= 1:
         raise Exception("Incorrect inputs; dat should be a DataFrame with at least two columns.")
